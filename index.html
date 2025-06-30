@@ -99,55 +99,55 @@
 <p>Thank you,<br><strong>I Love Sandbaai</strong></p>
 
 <script>
-  function sendEmail() {
-    var firstName = document.getElementById("firstName").value.trim();
-    var lastName = document.getElementById("lastName").value.trim();
-    var idNumber = document.getElementById("idNumber").value.trim();
-    var erf = document.getElementById("erf").value.trim();
-    var email = document.getElementById("email").value.trim();
+function sendEmail() {
+  var firstName = document.getElementById("firstName").value.trim().toUpperCase();
+  var lastName = document.getElementById("lastName").value.trim().toUpperCase();
+  var idNumber = document.getElementById("idNumber").value.trim().toUpperCase();
+  var erf = document.getElementById("erf").value.trim().toUpperCase();
+  var email = document.getElementById("email").value.trim();
 
-    // Validate required fields
-    if (!firstName || !lastName || !idNumber || !erf || !email) {
-      alert("Please fill out all required fields.");
-      return false;
-    }
-
-    // Validate email format
-    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      alert("Please enter a valid email address.");
-      return false;
-    }
-
-    var today = new Date();
-    var dateStr = today.toLocaleDateString('en-ZA');
-
-    var body = "TO:\n"
-      + "THE ACTING CHIEF FINANCIAL OFFICER OF THE OVERSTRAND MUNICIPALITY, MR DAVY LOUW;\n"
-      + "dlouw@overstrand.gov.za; CFO@overstrand.gov.za\n"
-      + "AND TO:\n"
-      + "THE SANDBAAI SPECIAL RATING AREA STEERING COMMITTEE\n"
-      + "admin@sandbaaisra.co.za\n\n"
-      + "NOTICE OF WITHDRAWAL OF CONSENT/PERMISSION FOR PROPOSED SPECIAL RATING AREA FOR SANDBAAI AND LODGING OBJECTION THERETO\n\n"
-      + "I, " + firstName + " " + lastName + ", ID Number: " + idNumber + "\n\n"
-      + "In my capacity as the owner/the duly authorised representative* of the owner of stand/ERF number " + erf + ", Sandbaai\n\n"
-      + "(*Attach a copy of the mandate or resolution (trust, company, close corporation or deceased estate’s letter of executorship) authorising you to act on behalf of the owner.)\n\n"
-      + "do hereby:\n\n"
-      + "1. withdraw my consent/permission for the proposed Sandbaai Special Rating Area, and\n\n"
-      + "2. record my objection to the proposed Sandbaai Special Rating Area. I will submit my motivation for objecting in due course within the period stipulated in terms of the SRA Policy read with the SRA By-law.\n\n"
-      + "Please acknowledge receipt hereof and confirm that the withdrawal of my consent/permission, and my objection as aforementioned, have been duly recorded.\n\n"
-      + "Regards\n"
-      + firstName + " " + lastName + "\n"
-      + dateStr;
-
-    var mailtoLink = "mailto:ilovesandbaai@gmail.com"
-      + "?subject=" + encodeURIComponent("Withdrawal of Consent – Sandbaai SRA")
-      + "&bcc=" + encodeURIComponent("ilovesandbaai@gmail.com")
-      + "&body=" + encodeURIComponent(body);
-
-    window.location.href = mailtoLink;
-    return false; // prevent default form submission
+  // Validate required fields
+  if (!firstName || !lastName || !idNumber || !erf || !email) {
+    alert("Please fill out all required fields.");
+    return false;
   }
+
+  // Validate email format
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    alert("Please enter a valid email address.");
+    return false;
+  }
+
+  var today = new Date();
+  var dateStr = today.toLocaleDateString('en-ZA');
+
+  var body = "TO:\n"
+    + "THE ACTING CHIEF FINANCIAL OFFICER OF THE OVERSTRAND MUNICIPALITY, MR DAVY LOUW;\n"
+    + "dlouw@overstrand.gov.za; CFO@overstrand.gov.za\n"
+    + "AND TO:\n"
+    + "THE SANDBAAI SPECIAL RATING AREA STEERING COMMITTEE\n"
+    + "admin@sandbaaisra.co.za\n\n"
+    + "NOTICE OF WITHDRAWAL OF CONSENT/PERMISSION FOR PROPOSED SPECIAL RATING AREA FOR SANDBAAI AND LODGING OBJECTION THERETO\n\n"
+    + "I, " + firstName + " " + lastName + ", ID NUMBER: " + idNumber + "\n\n"
+    + "In my capacity as the owner/the duly authorised representative* of the owner of stand/ERF number " + erf + ", SANDBAAI\n\n"
+    + "(*Attach a copy of the mandate or resolution (trust, company, close corporation or deceased estate’s letter of executorship) authorising you to act on behalf of the owner.)\n\n"
+    + "do hereby:\n\n"
+    + "1. withdraw my consent/permission for the proposed Sandbaai Special Rating Area, and\n\n"
+    + "2. record my objection to the proposed Sandbaai Special Rating Area. I will submit my motivation for objecting in due course within the period stipulated in terms of the SRA Policy read with the SRA By-law.\n\n"
+    + "Please acknowledge receipt hereof and confirm that the withdrawal of my consent/permission, and my objection as aforementioned, have been duly recorded.\n\n"
+    + "Regards\n"
+    + firstName + " " + lastName + "\n"
+    + dateStr;
+
+  var mailtoLink = "mailto:ilovesandbaai@gmail.com"
+    + "?subject=" + encodeURIComponent("Withdrawal of Consent – Sandbaai SRA")
+    + "&bcc=" + encodeURIComponent("ilovesandbaai@gmail.com")
+    + "&body=" + encodeURIComponent(body);
+
+  window.location.href = mailtoLink;
+  return false; // prevent default form submission
+}
 </script>
 
 </body>
