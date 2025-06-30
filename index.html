@@ -9,24 +9,38 @@
       font-family: sans-serif;
       max-width: 600px;
       margin: 40px auto;
-      padding: 0 20px;
+      padding: 20px;
+      background: #f0f0f0;
       line-height: 1.6;
     }
     h2 {
       text-align: center;
     }
     form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
       margin-bottom: 30px;
     }
     label {
       display: block;
       margin-top: 10px;
     }
-    input, textarea, select {
+    input[type="text"], input[type="email"], textarea {
       width: 100%;
       padding: 8px;
       margin-top: 4px;
       box-sizing: border-box;
+    }
+    textarea {
+      min-height: 120px;
+    }
+    .checkbox-group {
+      margin-top: 10px;
+    }
+    .checkbox-group label {
+      display: block;
+      margin-left: 20px;
     }
     button {
       margin-top: 20px;
@@ -72,15 +86,14 @@
     <input type="email" id="email" required>
   </label>
 
-  <label>Reasons for revoking consent:
-    <select id="reasons" multiple size="5" required>
-      <option value="Dishonesty of steering committee">Dishonesty of steering committee</option>
-      <option value="Harassment">Harassment</option>
-      <option value="Corruption">Corruption</option>
-      <option value="Lack of transparency">Lack of transparency</option>
-      <option value="Other">Other</option>
-    </select>
-  </label>
+  <div class="checkbox-group">
+    <strong>Reasons for revoking consent (select all that apply):</strong>
+    <label><input type="checkbox" name="reasons" value="Dishonesty of steering committee"> Dishonesty of steering committee</label>
+    <label><input type="checkbox" name="reasons" value="Harassment"> Harassment</label>
+    <label><input type="checkbox" name="reasons" value="Corruption"> Corruption</label>
+    <label><input type="checkbox" name="reasons" value="Lack of transparency"> Lack of transparency</label>
+    <label><input type="checkbox" name="reasons" value="Other"> Other</label>
+  </div>
 
   <label>Comments (optional – tell the municipality why you wish to revoke your consent):
     <textarea id="comments"></textarea>
@@ -110,16 +123,36 @@
     var lastName = document.getElementById("lastName").value.trim();
     var erf = document.getElementById("erf").value.trim();
     var email = document.getElementById("email").value.trim();
-    var reasonsSelect = document.getElementById("reasons");
-    var reasons = Array.from(reasonsSelect.selectedOptions).map(option => option.value).join(", ");
     var comments = document.getElementById("comments").value.trim();
 
+    // Validate required fields
+    if (!firstName || !lastName || !erf || !email) {
+      alert("Please fill out all required fields.");
+      return false;
+    }
+
+    // Validate email format
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      alert("Please enter a valid email address.");
+      return false;
+    }
+
+    // Gather reasons
+    var reasonInputs = document.querySelectorAll('input[name="reasons"]:checked');
+    var reasons = Array.from(reasonInputs).map(input => input.value);
+    var reasonsText = "";
+
+    if (reasons.length > 0) {
+      reasonsText = "Some of the reasons I do not consent to an SRA are: " + reasons.join(", ") + ".\n\n";
+    }
+
     var body = "I hereby formally notify the Overstrand Municipality that I do not give my consent for the formation of an SRA in Sandbaai. The OM may contact me for verification. Please confirm that it is on record that I do not consent to the formation of an SRA in Sandbaai.\n\n"
+      + reasonsText
       + "First Name: " + firstName + "\n"
       + "Last Name: " + lastName + "\n"
       + "Property ERF/Address: " + erf + "\n"
       + "Email: " + email + "\n"
-      + "Reasons: " + reasons + "\n"
       + (comments ? "Comments: " + comments + "\n" : "");
 
     var mailtoLink = "mailto:ilovesandbaai@gmail.com"
