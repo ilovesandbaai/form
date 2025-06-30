@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Public Participation Form</title>
+</head>
+<body>
+  <h2>Public Participation Form</h2>
+  <form onsubmit="return sendEmail()">
+    <label>Name:<br>
+    <input type="text" id="name" required></label><br><br>
+
+    <label>Email:<br>
+    <input type="email" id="email" required></label><br><br>
+
+    <label>Message:<br>
+    <textarea id="message" required></textarea></label><br><br>
+
+    <button type="submit">Send Email</button>
+  </form>
+
+  <script>
+    function sendEmail() {
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var message = document.getElementById("message").value;
+
+      var mailtoLink = "mailto:municipality@example.com"
+        + "?cc=" + encodeURIComponent(email)
+        + "&subject=" + encodeURIComponent("Public Participation Submission from " + name)
+        + "&body=" + encodeURIComponent(message + "\n\nFrom: " + name + " <" + email + ">");
+
+      window.location.href = mailtoLink;
+      return false; // prevent default form submission
+    }
+  </script>
+</body>
+</html>
