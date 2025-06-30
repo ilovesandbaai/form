@@ -1,38 +1,135 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Public Participation Form</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I Do Not Consent – Sandbaai SRA</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+    }
+    h2 {
+      text-align: center;
+    }
+    form {
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      background: #0074cc;
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    .note {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 10px;
+    }
+    ul {
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Public Participation Form</h2>
-  <form onsubmit="return sendEmail()">
-    <label>Name:<br>
-    <input type="text" id="name" required></label><br><br>
 
-    <label>Email:<br>
-    <input type="email" id="email" required></label><br><br>
+<h2>Revoke Consent for Sandbaai SRA</h2>
 
-    <label>Message:<br>
-    <textarea id="message" required></textarea></label><br><br>
+<form onsubmit="return sendEmail()">
+  <label>First Name:
+    <input type="text" id="firstName" required>
+  </label>
 
-    <button type="submit">Send Email</button>
-  </form>
+  <label>Last Name:
+    <input type="text" id="lastName" required>
+  </label>
 
-  <script>
-    function sendEmail() {
-      var name = document.getElementById("name").value;
-      var email = document.getElementById("email").value;
-      var message = document.getElementById("message").value;
+  <label>Property ERF (or street address if unknown):
+    <input type="text" id="erf" required>
+  </label>
 
-      var mailtoLink = "mailto:municipality@example.com"
-        + "?cc=" + encodeURIComponent(email)
-        + "&subject=" + encodeURIComponent("Public Participation Submission from " + name)
-        + "&body=" + encodeURIComponent(message + "\n\nFrom: " + name + " <" + email + ">");
+  <label>Email address (use the same email you receive your rates and taxes at):
+    <input type="email" id="email" required>
+  </label>
 
-      window.location.href = mailtoLink;
-      return false; // prevent default form submission
-    }
-  </script>
+  <label>Reasons for revoking consent:
+    <select id="reasons" multiple size="5" required>
+      <option value="Dishonesty of steering committee">Dishonesty of steering committee</option>
+      <option value="Harassment">Harassment</option>
+      <option value="Corruption">Corruption</option>
+      <option value="Lack of transparency">Lack of transparency</option>
+      <option value="Other">Other</option>
+    </select>
+  </label>
+
+  <label>Comments (optional – tell the municipality why you wish to revoke your consent):
+    <textarea id="comments"></textarea>
+  </label>
+
+  <button type="submit">Email Overstrand Municipality</button>
+  <div class="note">This button will open your email app. You will need to push the send button there.</div>
+</form>
+
+<h3>Why revoke your consent?</h3>
+<p>The Sandbaai SRA steering committee has abused the trust of the people and violated the law. Many people with good intentions have realised they were misled. Here are some of the problems:</p>
+<ul>
+  <li>Lack of financial transparency</li>
+  <li>Ignoring public objections</li>
+  <li>Manipulation of information shared with residents</li>
+  <li>Failure to disclose conflicts of interest</li>
+  <li>Harassment of those who ask questions</li>
+</ul>
+
+<p><strong>Disclaimer:</strong> The data you enter on this page is not stored or shared with anyone. It is only used to generate the email you send.</p>
+
+<p>Signed,<br><strong>I Love Sandbaai</strong></p>
+
+<script>
+  function sendEmail() {
+    var firstName = document.getElementById("firstName").value.trim();
+    var lastName = document.getElementById("lastName").value.trim();
+    var erf = document.getElementById("erf").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var reasonsSelect = document.getElementById("reasons");
+    var reasons = Array.from(reasonsSelect.selectedOptions).map(option => option.value).join(", ");
+    var comments = document.getElementById("comments").value.trim();
+
+    var body = "I hereby formally notify the Overstrand Municipality that I do not give my consent for the formation of an SRA in Sandbaai. The OM may contact me for verification. Please confirm that it is on record that I do not consent to the formation of an SRA in Sandbaai.\n\n"
+      + "First Name: " + firstName + "\n"
+      + "Last Name: " + lastName + "\n"
+      + "Property ERF/Address: " + erf + "\n"
+      + "Email: " + email + "\n"
+      + "Reasons: " + reasons + "\n"
+      + (comments ? "Comments: " + comments + "\n" : "");
+
+    var mailtoLink = "mailto:ilovesandbaai@gmail.com"
+      + "?subject=" + encodeURIComponent("I do not consent to the formation of the Sandbaai SRA")
+      + "&body=" + encodeURIComponent(body);
+
+    window.location.href = mailtoLink;
+    return false; // prevent default form submission
+  }
+</script>
+
 </body>
 </html>
