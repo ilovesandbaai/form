@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>I Do Not Consent – Sandbaai SRA</title>
+  <title>Withdrawal of Consent – Sandbaai SRA</title>
   <style>
     body {
       font-family: sans-serif;
@@ -67,7 +67,7 @@
 </head>
 <body>
 
-<h2>Revoke Consent for Sandbaai SRA</h2>
+<h2>Withdraw Consent for Sandbaai SRA</h2>
 
 <form onsubmit="return sendEmail()">
   <label>First Name:
@@ -78,6 +78,10 @@
     <input type="text" id="lastName" required>
   </label>
 
+  <label>ID Number:
+    <input type="text" id="idNumber" required>
+  </label>
+
   <label>Property ERF (or street address if unknown):
     <input type="text" id="erf" required>
   </label>
@@ -86,47 +90,24 @@
     <input type="email" id="email" required>
   </label>
 
-  <div class="checkbox-group">
-    <strong>Reasons for revoking consent (select all that apply):</strong>
-    <label><input type="checkbox" name="reasons" value="Dishonesty of steering committee"> Dishonesty of steering committee</label>
-    <label><input type="checkbox" name="reasons" value="Harassment"> Harassment</label>
-    <label><input type="checkbox" name="reasons" value="Corruption"> Corruption</label>
-    <label><input type="checkbox" name="reasons" value="Lack of transparency"> Lack of transparency</label>
-    <label><input type="checkbox" name="reasons" value="Other"> Other</label>
-  </div>
-
-  <label>Comments (optional – tell the municipality why you wish to revoke your consent):
-    <textarea id="comments"></textarea>
-  </label>
-
   <button type="submit">Email Overstrand Municipality</button>
   <div class="note">This button will open your email app. You will need to push the send button there.</div>
 </form>
 
-<h3>Why revoke your consent?</h3>
-<p>The Sandbaai SRA steering committee has abused the trust of the people and violated the law. Many people with good intentions have realised they were misled. Here are some of the problems:</p>
-<ul>
-  <li>Lack of financial transparency</li>
-  <li>Ignoring public objections</li>
-  <li>Manipulation of information shared with residents</li>
-  <li>Failure to disclose conflicts of interest</li>
-  <li>Harassment of those who ask questions</li>
-</ul>
+<p><strong>Disclaimer:</strong> The data you enter on this page is only used to generate the email you send.</p>
 
-<p><strong>Privacy:</strong> The data you enter on this page is not shared with anyone. It is only used to generate the email you send. Unlike the SRA we respect your privacy.</p>
-
-<p>Signed,<br><strong>I Love Sandbaai</strong></p>
+<p>Thank you,<br><strong>I Love Sandbaai</strong></p>
 
 <script>
   function sendEmail() {
     var firstName = document.getElementById("firstName").value.trim();
     var lastName = document.getElementById("lastName").value.trim();
+    var idNumber = document.getElementById("idNumber").value.trim();
     var erf = document.getElementById("erf").value.trim();
     var email = document.getElementById("email").value.trim();
-    var comments = document.getElementById("comments").value.trim();
 
     // Validate required fields
-    if (!firstName || !lastName || !erf || !email) {
+    if (!firstName || !lastName || !idNumber || !erf || !email) {
       alert("Please fill out all required fields.");
       return false;
     }
@@ -138,25 +119,27 @@
       return false;
     }
 
-    // Gather reasons
-    var reasonInputs = document.querySelectorAll('input[name="reasons"]:checked');
-    var reasons = Array.from(reasonInputs).map(input => input.value);
-    var reasonsText = "";
+    var today = new Date();
+    var dateStr = today.toLocaleDateString('en-ZA');
 
-    if (reasons.length > 0) {
-      reasonsText = "Some of the reasons I do not consent to an SRA are: " + reasons.join(", ") + ".\n\n";
-    }
-
-    var body = "I hereby formally notify the Overstrand Municipality that I do not give my consent for the formation of an SRA in Sandbaai. The OM may contact me for verification. Please confirm that it is on record that I do not consent to the formation of an SRA in Sandbaai.\n\n"
-      + reasonsText
-      + "First Name: " + firstName + "\n"
-      + "Last Name: " + lastName + "\n"
-      + "Property ERF/Address: " + erf + "\n"
-      + "Email: " + email + "\n"
-      + (comments ? "Comments: " + comments + "\n" : "");
+    var body = "TO: THE ACTING CHIEF FINANCIAL OFFICER OF THE OVERSTRAND MUNICIPALITY, MR DAVY LOUW;\n"
+      + "dlouw@overstrand.gov.za; CFO@overstrand.gov.za\n"
+      + "AND TO: THE SANDBAAI SPECIAL RATING AREA STEERING COMMITTEE\n"
+      + "admin@sandbaaisra.co.za\n\n"
+      + "NOTICE OF WITHDRAWAL OF CONSENT/PERMISSION FOR PROPOSED SPECIAL RATING AREA FOR SANDBAAI AND LODGING OBJECTION THERETO\n\n"
+      + "I, " + firstName + " " + lastName + ", ID Number: " + idNumber + "\n\n"
+      + "In my capacity as the owner/the duly authorised representative* of the owner of stand/ERF number " + erf + ", Sandbaai\n\n"
+      + "(*Attach a copy of the mandate or resolution (trust, company, close corporation or deceased estate’s letter of executorship) authorising you to act on behalf of the owner.)\n\n"
+      + "do hereby:\n\n"
+      + "1. withdraw my consent/permission for the proposed Sandbaai Special Rating Area, and\n\n"
+      + "2. record my objection to the proposed Sandbaai Special Rating Area. I will submit my motivation for objecting in due course within the period stipulated in terms of the SRA Policy read with the SRA By-law.\n\n"
+      + "Please acknowledge receipt hereof and confirm that the withdrawal of my consent/permission, and my objection as aforementioned, have been duly recorded.\n\n"
+      + "Regards\n"
+      + firstName + " " + lastName + "\n"
+      + dateStr;
 
     var mailtoLink = "mailto:ilovesandbaai@gmail.com"
-      + "?subject=" + encodeURIComponent("I do not consent to the formation of the Sandbaai SRA")
+      + "?subject=" + encodeURIComponent("Withdrawal of Consent – Sandbaai SRA")
       + "&bcc=" + encodeURIComponent("ilovesandbaai@gmail.com")
       + "&body=" + encodeURIComponent(body);
 
