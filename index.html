@@ -125,24 +125,24 @@ function sendEmail() {
   var dateStr = today.toLocaleDateString('en-ZA');
 
   var body 
-    = "TO:        THE ACTING CHIEF FINANCIAL OFFICER OF THE OVERSTRAND MUNICIPALITY, MR DAVY LOUW;\n"
-    + "dlouw@overstrand.gov.za; CFO@overstrand.gov.za\n\n"
+    = "TO:          THE ACTING CHIEF FINANCIAL OFFICER OF THE OVERSTRAND MUNICIPALITY, MR DAVY LOUW;\n"
+    + "dlouw@overstrand.gov.za; CFO@overstrand.gov.za\n"
     + "AND TO:    THE SANDBAAI SPECIAL RATING AREA STEERING COMMITTEE\n"
     + "admin@sandbaaisra.co.za\n\n"
     + "NOTICE OF WITHDRAWAL OF CONSENT/PERMISSION FOR PROPOSED SPECIAL RATING AREA FOR SANDBAAI AND LODGING OBJECTION THERETO\n\n\n\n"
     + "I, " + firstName + " " + lastName + ", [ID NUMBER: " + idNumber + "]\n\n"
-    + "In my capacity as the owner/the duly authorised representative* of the owner of stand/ERF number " + erf + ", SANDBAAI\n\n"
-    + "(*If not the owner, attach a copy of the mandate or resolution (trust, company, close corporation or deceased estate’s letter of executorship) authorising you to act on behalf of the owner.)\n\n"
+    + "In my capacity as the owner/the duly authorised representative of the owner of stand/ERF number " + erf + ", SANDBAAI\n\n"
+    + "(*If not the owner, I will attach a copy of the mandate or resolution (trust, company, close corporation or deceased estate’s letter of executorship) authorising me to act on behalf of the owner.)\n\n"
     + "do hereby:\n\n"
     + "    1. Withdraw my consent/permission for the proposed Sandbaai Special Rating Area, and\n\n"
     + "    2. Record my objection to the proposed Sandbaai Special Rating Area. I will submit my motivation for objecting in due course within the period stipulated in terms of the SRA Policy read with the SRA By-law.\n\n\n\n"
-    + "To be clear, I do NOT consent to the formation of the Sandbaai SRA.\n\n\n\n"
+    + "To be clear, I do NOT consent to the formation of the Sandbaai Special Rating Area.\n\n\n\n"
     
     + "Please acknowledge receipt hereof and confirm that the withdrawal of my consent/permission, and my objection as aforementioned, have been duly recorded.\n\n\n\n"
     + "Regards,\n"
     + firstName + " " + lastName + "\n"
     + "Email: " + email + "\n"
-    + "date: " + dateStr;
+    + "Date: " + dateStr;
 
   var mailtoLink = "mailto:ilovesandbaai@gmail.com"
     + "?subject=" + encodeURIComponent("Withdrawal of Consent – Sandbaai SRA")
