@@ -144,9 +144,10 @@ function sendEmail() {
     + "Email: " + email + "\n"
     + "Date: " + dateStr;
 
-  var mailtoLink = "mailto:ilovesandbaai@gmail.com"
-    + "?subject=" + encodeURIComponent("Withdrawal of Consent – Sandbaai SRA")
+  var mailtoLink = "mailto:dlouw@overstrand.gov.za,CFO@overstrand.gov.za"
+    + "?cc=" + encodeURIComponent("admin@sandbaaisra.co.za")
     + "&bcc=" + encodeURIComponent("ilovesandbaai@gmail.com")
+    + "?subject=" + encodeURIComponent("Withdrawal of Consent – Sandbaai SRA")
     + "&body=" + encodeURIComponent(body);
 
   window.location.href = mailtoLink;
